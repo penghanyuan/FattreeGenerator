@@ -1,5 +1,5 @@
 //
-// Created by PENG Hanyuan on 08/02/2018.
+// Created by PENG Hanyuan & YAN Wenli on 08/02/2018.
 //
 
 #ifndef TP1_CORESWITCH_H
@@ -9,15 +9,22 @@
 #include "Node.h"
 class CoreSwitch:public Node {
 private:
-    int name_a;
-    int name_b;
-    int name_c;
+    int name_a;//first bit
+    int name_b;//second bit
+    int name_c;//third bit
 public:
 
     CoreSwitch() {
         Node::Node();
         n_type = "Switch";
     }
+    /**
+     *
+     * @param a first bit
+     * @param b second bit
+     * @param c third bit
+     * @param numPort number of port
+     */
     CoreSwitch(const int a, const int b, const int c, int numPort) {
         Node::Node();
         name_a = a;

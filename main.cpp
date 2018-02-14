@@ -7,19 +7,17 @@
 using namespace std;
 
 
-
+//sort the vector connect
 bool comareConnect(Connect * c1,Connect * c2)
 {
     return c1->getI_ori_port()<c2->getI_ori_port();
 }
 
-
-
 int main(int argc, char*argv[]) {
 
     int i,k = 0, nbHostTotal,nbSwitchTotal,nbHostEachPod;
     vector<Pod> v_pods;
-
+    multimap<string,CoreSwitch> m_coreSwitch;
     if(argc>1) {
         if(k%2==0&&k<2) {
             k = atoi(argv[1]);
@@ -71,11 +69,14 @@ int main(int argc, char*argv[]) {
         }
     }
 
-    //generate AggrSwitch
-
-    for(i = 0;i<pow((k / 2), 2);i++){
-        int numMystery = 1;
-        CoreSwitch *coreSwitch = new CoreSwitch(k,1,numMystery,k);
+    //generate coreSwitch, divise in k/2 groups, each group has k/2 coreSwitch
+    for(i = 0;i<k/2;i++){
+        int j = 0;
+        for(j = 0;j<k/2;j++){
+            //i+1 is the group of each coreSwitch
+            CoreSwitch *coreSwitch = new CoreSwitch(k,i+1,j+1,k);
+            m_coreSwitch.insert(pair<string,CoreSwitch>(coreSwitch->getName(),*coreSwitch));
+        }
     }
 
 
@@ -83,18 +84,17 @@ int main(int argc, char*argv[]) {
     multimap<string,Host>::iterator m_it_host;
     multimap<string,EdgeSwitch>::iterator m_it_es;
     multimap<string,AggrSwitch>::iterator m_it_as;
+    multimap<string,CoreSwitch>::iterator m_it_cs;
 
     //add connections for each pod
     for(v_it_pod = v_pods.begin();v_it_pod!=v_pods.end();v_it_pod++){
         int port_aggr = 1;//calculate the port of aggrSwitch to which the edgeSwitch is connected
-
         //add connection for each edgeSwitch
         for(m_it_es = v_it_pod->getV_edgeSwitch().begin();m_it_es!=v_it_pod->getV_edgeSwitch().end();m_it_es++){
             int port_edge = 1;//calculate the port of edgeSwitch to which the host is connected
-
             //for each edgeSwitch, connect to k/2 hosts.
             for(i = 0;i<k/2;i++) {
-                int id_host = m_it_es->second.getName_a()*k+(m_it_es->second.getName_b()*k/2)+i;
+                int id_host = m_it_es->second.getName_a()*(v_it_pod->getNumMaxHost())+(m_it_es->second.getName_b()*k/2)+i;
                 ostringstream ostr;
                 ostr <<id_host;
                 m_it_host = v_it_pod->getV_host().find("\"Node("+ostr.str()+")\"");
@@ -133,6 +133,35 @@ int main(int argc, char*argv[]) {
                 port_edge+=2;
             }
             port_aggr++;
+        }
+
+
+        //add connect between aggrSwitch and coreSwitch
+        int group_aggr = 1;//the group of each aggrSwitch
+        for(m_it_as = v_it_pod->getV_aggrSwitch().begin();m_it_as!=v_it_pod->getV_aggrSwitch().end();m_it_as++){
+            int port_aggr2core = 1;//the port of aggrSwitch connect to coreSwitch
+            //for each aggrSwitch, connect to k/2 coreSwitch.
+            for(i = 0;i<k/2;i++) {
+                ostringstream ostr;
+                ostr <<k<<" "<<group_aggr<<" "<<(i+1);
+                m_it_cs = m_coreSwitch.find("\"Core("+ostr.str()+")\"");
+                // set aggr connect to host
+                Connect *connectA2C = new Connect();
+                connectA2C->setPN_connect_with(&(m_it_cs->second));
+                connectA2C->setI_des_port(v_it_pod->getNPod()+1);
+                connectA2C->setI_ori_port(port_aggr2core);
+                m_it_as->second.addConnect(*connectA2C);
+
+                // set core connect to aggr
+                Connect *connectC2A = new Connect();
+                connectC2A->setI_ori_port(v_it_pod->getNPod()+1);
+                connectC2A->setI_des_port(port_aggr2core);
+                connectC2A->setPN_connect_with(&(m_it_as->second));
+                m_it_cs->second.addConnect(*connectC2A);
+                port_aggr2core+=2;
+            }
+            group_aggr++;
+
         }
 
     }
@@ -189,7 +218,18 @@ int main(int argc, char*argv[]) {
     }
 
     //print coreSwitch
-    for(i = 0;i<pow((k/2),2);i++){
+    for(m_it_cs = m_coreSwitch.begin();m_it_cs!=m_coreSwitch.end();m_it_cs++){
+        outputfFile<<endl;
+        outputfFile<<m_it_cs->second.getType()<<"\t";
+        outputfFile<<m_it_cs->second.getNum_port()<<"\t";
+        outputfFile<<m_it_cs->second.getName()<<endl;
+        sort(m_it_cs->second.getV_connect().begin(),m_it_cs->second.getV_connect().end(),comareConnect);
+        for(i=0;i<m_it_cs->second.getV_connect().size();i++){
+            outputfFile <<"[" <<m_it_cs->second.getV_connect()[i]->getI_ori_port()<<"]"<<"\t"
+                        << m_it_cs->second.getV_connect()[i]->getPN_connect_with()->getName()<<"\t"
+                        <<"[" <<m_it_cs->second.getV_connect()[i]->getI_des_port()<<"]"
+                        << endl;
+        }
     }
     outputfFile.close();
     return 0;

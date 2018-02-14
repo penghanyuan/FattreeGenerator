@@ -1,5 +1,5 @@
 //
-// Created by PENG Hanyuan on 08/02/2018.
+// Created by PENG Hanyuan & YAN Wenli on 08/02/2018.
 //
 
 #ifndef TP1_NODE_H

@@ -1,5 +1,5 @@
 //
-// Created by PENG Hanyuan on 08/02/2018.
+// Created by PENG Hanyuan & YAN Wenli on 08/02/2018.
 //
 
 #include "Node.h"
@@ -41,6 +41,6 @@ void Node::addConnect(Connect &connect) {
     if(v_connect.size()<n_num_port) {
         v_connect.push_back(&connect);
     }else{
-        cout<<"No more port"<<endl;
+        cout<<(*this).getName()<<"No more port"<<endl;
     }
 }

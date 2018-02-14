@@ -1,5 +1,5 @@
 //
-// Created by PENG Hanyuan on 11/02/2018.
+// Created by PENG Hanyuan & YAN Wenli on 11/02/2018.
 //
 
 #include "Connect.h"
