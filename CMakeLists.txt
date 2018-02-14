@@ -3,4 +3,4 @@ project(Tp1)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_executable(Tp1 main.cpp Model/Pod.cpp Model/Pod.h Model/Host.cpp Model/Host.h Model/Node.cpp Model/Node.h Model/EdgeSwitch.cpp Model/EdgeSwitch.h Model/AggrSwitch.cpp Model/AggrSwitch.h Model/CoreSwitch.cpp Model/CoreSwitch.h Model/Connect.cpp Model/Connect.h)
+add_executable(Tp1 main.cpp Pod.cpp Pod.h Host.cpp Host.h Node.cpp Node.h EdgeSwitch.cpp EdgeSwitch.h AggrSwitch.cpp AggrSwitch.h CoreSwitch.cpp CoreSwitch.h Connect.cpp Connect.h)

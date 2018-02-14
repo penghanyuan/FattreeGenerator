@@ -1,14 +1,14 @@
 #include <iostream>
 #include <fstream>
 #include <math.h>
-#include "Model/Pod.h"
-#include "Model/CoreSwitch.h"
+#include "Pod.h"
+#include "CoreSwitch.h"
 
 using namespace std;
 
 
 //sort the vector connect
-bool comareConnect(Connect * c1,Connect * c2)
+bool compareConnect(Connect * c1,Connect * c2)
 {
     return c1->getI_ori_port()<c2->getI_ori_port();
 }
@@ -188,7 +188,7 @@ int main(int argc, char*argv[]) {
             outputfFile << m_it_es->second.getType() << "\t";
             outputfFile << m_it_es->second.getNum_port() << "\t";
             outputfFile << m_it_es->second.getName() << endl;
-            sort(m_it_es->second.getV_connect().begin(),m_it_es->second.getV_connect().end(),comareConnect);
+            sort(m_it_es->second.getV_connect().begin(),m_it_es->second.getV_connect().end(),compareConnect);
             for(i=0;i<m_it_es->second.getV_connect().size();i++){
                 outputfFile <<"[" <<m_it_es->second.getV_connect()[i]->getI_ori_port()<<"]"<<"\t"
                             << m_it_es->second.getV_connect()[i]->getPN_connect_with()->getName()<<"\t"
@@ -207,7 +207,7 @@ int main(int argc, char*argv[]) {
             outputfFile<<m_it_as->second.getType()<<"\t";
             outputfFile<<m_it_as->second.getNum_port()<<"\t";
             outputfFile<<m_it_as->second.getName()<<endl;
-            sort(m_it_as->second.getV_connect().begin(),m_it_as->second.getV_connect().end(),comareConnect);
+            sort(m_it_as->second.getV_connect().begin(),m_it_as->second.getV_connect().end(),compareConnect);
             for(i=0;i<m_it_as->second.getV_connect().size();i++){
                 outputfFile <<"[" <<m_it_as->second.getV_connect()[i]->getI_ori_port()<<"]"<<"\t"
                             << m_it_as->second.getV_connect()[i]->getPN_connect_with()->getName()<<"\t"
@@ -223,7 +223,7 @@ int main(int argc, char*argv[]) {
         outputfFile<<m_it_cs->second.getType()<<"\t";
         outputfFile<<m_it_cs->second.getNum_port()<<"\t";
         outputfFile<<m_it_cs->second.getName()<<endl;
-        sort(m_it_cs->second.getV_connect().begin(),m_it_cs->second.getV_connect().end(),comareConnect);
+        sort(m_it_cs->second.getV_connect().begin(),m_it_cs->second.getV_connect().end(),compareConnect);
         for(i=0;i<m_it_cs->second.getV_connect().size();i++){
             outputfFile <<"[" <<m_it_cs->second.getV_connect()[i]->getI_ori_port()<<"]"<<"\t"
                         << m_it_cs->second.getV_connect()[i]->getPN_connect_with()->getName()<<"\t"
