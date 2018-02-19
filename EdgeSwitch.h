@@ -52,6 +52,8 @@ public:
     int getName_c() const;
 
     void setName_c(int name_c);
+
+
 };
 
 

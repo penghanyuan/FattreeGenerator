@@ -3,6 +3,8 @@
 //
 
 #include "EdgeSwitch.h"
+#include <fstream>
+
 
 void EdgeSwitch::setName(const int a, const int b, const int c) {
     ostringstream ostr;
@@ -33,3 +35,6 @@ int EdgeSwitch::getName_c() const {
 void EdgeSwitch::setName_c(int name_c) {
     EdgeSwitch::name_c = name_c;
 }
+
+
+

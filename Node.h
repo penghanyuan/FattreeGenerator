@@ -43,6 +43,11 @@ public:
 
     void addConnect(Connect &connect);
 
+    static bool compareConnect(Connect * c1,Connect * c2);
+
+    void sortConnectList();
+
+    void printNode(ofstream &outputfFile);
 };
 
 

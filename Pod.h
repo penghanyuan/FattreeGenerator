@@ -10,6 +10,7 @@
 #include "Host.h"
 #include <vector>
 #include <map>
+
 using namespace std;
 class Pod {
 private:
@@ -62,6 +63,8 @@ public:
     multimap<string, AggrSwitch> &getV_aggrSwitch();
 
     void setV_aggrSwitch(const multimap<string, AggrSwitch> &v_aggrSwitch);
+
+    void printPod(ofstream &outputfFile);
 };
 
 

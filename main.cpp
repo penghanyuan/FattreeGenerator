@@ -167,69 +167,15 @@ int main(int argc, char*argv[]) {
     }
 
     //print
-    //print hosts
     for(v_it_pod = v_pods.begin();v_it_pod!=v_pods.end();v_it_pod++){
-        for(m_it_host = v_it_pod->getV_host().begin();m_it_host!=v_it_pod->getV_host().end();m_it_host++) {
-            outputfFile<<endl;
-            outputfFile << m_it_host->second.getType() << "\t";
-            outputfFile << m_it_host->second.getNum_port() << "\t";
-            outputfFile << m_it_host->second.getName() << endl;
-            outputfFile <<"[" <<m_it_host->second.getV_connect()[0]->getI_ori_port()<<"]"<<"\t"
-                        << m_it_host->second.getV_connect()[0]->getPN_connect_with()->getName()<<"\t"
-                        <<"[" <<m_it_host->second.getV_connect()[0]->getI_des_port()<<"]"
-                        << endl;
-        }
-    }
-
-    //print edgeSwitch
-    for(v_it_pod = v_pods.begin();v_it_pod!=v_pods.end();v_it_pod++){
-        for(m_it_es = v_it_pod->getV_edgeSwitch().begin();m_it_es!=v_it_pod->getV_edgeSwitch().end();m_it_es++){
-            outputfFile<<endl;
-            outputfFile << m_it_es->second.getType() << "\t";
-            outputfFile << m_it_es->second.getNum_port() << "\t";
-            outputfFile << m_it_es->second.getName() << endl;
-            sort(m_it_es->second.getV_connect().begin(),m_it_es->second.getV_connect().end(),compareConnect);
-            for(i=0;i<m_it_es->second.getV_connect().size();i++){
-                outputfFile <<"[" <<m_it_es->second.getV_connect()[i]->getI_ori_port()<<"]"<<"\t"
-                            << m_it_es->second.getV_connect()[i]->getPN_connect_with()->getName()<<"\t"
-                            <<"[" <<m_it_es->second.getV_connect()[i]->getI_des_port()<<"]"
-                            << endl;
-            }
-
-        }
+        v_it_pod->printPod(outputfFile);
 
     }
 
-    //print aggrSwitch
-    for(v_it_pod = v_pods.begin();v_it_pod!=v_pods.end();v_it_pod++){
-        for(m_it_as = v_it_pod->getV_aggrSwitch().begin();m_it_as!=v_it_pod->getV_aggrSwitch().end();m_it_as++){
-            outputfFile<<endl;
-            outputfFile<<m_it_as->second.getType()<<"\t";
-            outputfFile<<m_it_as->second.getNum_port()<<"\t";
-            outputfFile<<m_it_as->second.getName()<<endl;
-            sort(m_it_as->second.getV_connect().begin(),m_it_as->second.getV_connect().end(),compareConnect);
-            for(i=0;i<m_it_as->second.getV_connect().size();i++){
-                outputfFile <<"[" <<m_it_as->second.getV_connect()[i]->getI_ori_port()<<"]"<<"\t"
-                            << m_it_as->second.getV_connect()[i]->getPN_connect_with()->getName()<<"\t"
-                            <<"[" <<m_it_as->second.getV_connect()[i]->getI_des_port()<<"]"
-                            << endl;
-            }
-        }
-    }
 
     //print coreSwitch
     for(m_it_cs = m_coreSwitch.begin();m_it_cs!=m_coreSwitch.end();m_it_cs++){
-        outputfFile<<endl;
-        outputfFile<<m_it_cs->second.getType()<<"\t";
-        outputfFile<<m_it_cs->second.getNum_port()<<"\t";
-        outputfFile<<m_it_cs->second.getName()<<endl;
-        sort(m_it_cs->second.getV_connect().begin(),m_it_cs->second.getV_connect().end(),compareConnect);
-        for(i=0;i<m_it_cs->second.getV_connect().size();i++){
-            outputfFile <<"[" <<m_it_cs->second.getV_connect()[i]->getI_ori_port()<<"]"<<"\t"
-                        << m_it_cs->second.getV_connect()[i]->getPN_connect_with()->getName()<<"\t"
-                        <<"[" <<m_it_cs->second.getV_connect()[i]->getI_des_port()<<"]"
-                        << endl;
-        }
+       m_it_cs->second.printNode(outputfFile);
     }
     outputfFile.close();
     return 0;
