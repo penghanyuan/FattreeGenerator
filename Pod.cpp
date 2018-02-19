@@ -5,15 +5,15 @@
 #include "Pod.h"
 
 void Pod::addHost(Host &host){
-    v_host.insert(pair<string,Host>(host.getName(),host));
+    v_host.insert(make_pair(host.getName(),host));
 }
 
 void Pod::addEageSwitch(EdgeSwitch &edgeSwitch){
-    v_edgeSwitch.insert(pair<string,EdgeSwitch>(edgeSwitch.getName(),edgeSwitch));
+    v_edgeSwitch.insert(make_pair(edgeSwitch.getName(),edgeSwitch));
 }
 
 void Pod::addAggrSwitch(AggrSwitch &aggrSwitch){
-    v_aggrSwitch.insert(pair<string,AggrSwitch>(aggrSwitch.getName(),aggrSwitch));
+    v_aggrSwitch.insert(make_pair(aggrSwitch.getName(),aggrSwitch));
 }
 
 

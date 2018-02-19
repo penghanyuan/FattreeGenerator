@@ -64,7 +64,7 @@ int main(int argc, char*argv[]) {
         //generate AggrSwitch
         for(j = 0;j<v_pods[i].getNumMaxAggrS();j++){
             int numMystery = 1;
-            AggrSwitch *aggrSwitch = new AggrSwitch(i,j+2,numMystery,k);
+            AggrSwitch *aggrSwitch = new AggrSwitch(i,j+(k/2),numMystery,k);
             v_pods[i].addAggrSwitch(*aggrSwitch);
         }
     }
