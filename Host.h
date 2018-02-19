@@ -30,6 +30,7 @@ public:
     }
 
     void setName(const int num);
+
 };
 
 

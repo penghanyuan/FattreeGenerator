@@ -3,10 +3,11 @@
 //
 
 #include "Host.h"
-
+#include <fstream>
 
 void Host::setName(const int num) {
     ostringstream ostr;
     ostr << num;
     n_name = "\"Node("+ostr.str()+")\"";
 }
+
