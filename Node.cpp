@@ -56,7 +56,7 @@ void Node::sortConnectList() {
 }
 
 void Node::printNode(ofstream &outputfFile) {
-
+    outputfFile << endl;
     outputfFile << n_type<< "\t";
     outputfFile << n_num_port << "\t";
     outputfFile << n_name << endl;

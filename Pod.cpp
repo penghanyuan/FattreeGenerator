@@ -87,7 +87,6 @@ void Pod::printPod(ofstream &outputfFile){
     for(m_it_host = v_host.begin();m_it_host!=v_host.end();m_it_host++){
         m_it_host->second.printNode(outputfFile);
     }
-
     for(m_it_es = v_edgeSwitch.begin();m_it_es!=v_edgeSwitch.end();m_it_es++){
         m_it_es->second.printNode(outputfFile);
     }
