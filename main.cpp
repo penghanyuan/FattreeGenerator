@@ -168,7 +168,15 @@ int main(int argc, char*argv[]) {
 
     //print
     for(v_it_pod = v_pods.begin();v_it_pod!=v_pods.end();v_it_pod++){
-        v_it_pod->printPod(outputfFile);
+        v_it_pod->printHosts(outputfFile);
+
+    }
+    for(v_it_pod = v_pods.begin();v_it_pod!=v_pods.end();v_it_pod++){
+        v_it_pod->printEdge(outputfFile);
+
+    }
+    for(v_it_pod = v_pods.begin();v_it_pod!=v_pods.end();v_it_pod++){
+        v_it_pod->printAggr(outputfFile);
 
     }
 

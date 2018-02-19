@@ -64,7 +64,9 @@ public:
 
     void setV_aggrSwitch(const multimap<string, AggrSwitch> &v_aggrSwitch);
 
-    void printPod(ofstream &outputfFile);
+    void printHosts(ofstream &outputfFile);
+    void printEdge(ofstream &outputfFile);
+    void printAggr(ofstream &outputfFile);
 };
 
 

@@ -79,21 +79,27 @@ void Pod::setV_aggrSwitch(const multimap<string, AggrSwitch> &v_aggrSwitch) {
     Pod::v_aggrSwitch = v_aggrSwitch;
 }
 
-void Pod::printPod(ofstream &outputfFile){
+void Pod::printHosts(ofstream &outputfFile){
     multimap<string,Host>::iterator m_it_host;
-    multimap<string,EdgeSwitch>::iterator m_it_es;
-    multimap<string,AggrSwitch>::iterator m_it_as;
 
     for(m_it_host = v_host.begin();m_it_host!=v_host.end();m_it_host++){
         m_it_host->second.printNode(outputfFile);
     }
+}
+
+void Pod::printEdge(ofstream &outputfFile){
+    multimap<string,EdgeSwitch>::iterator m_it_es;
+
     for(m_it_es = v_edgeSwitch.begin();m_it_es!=v_edgeSwitch.end();m_it_es++){
         m_it_es->second.printNode(outputfFile);
     }
 
+}
+
+void Pod::printAggr(ofstream &outputfFile){
+    multimap<string,AggrSwitch>::iterator m_it_as;
+
     for(m_it_as = v_aggrSwitch.begin();m_it_as!=v_aggrSwitch.end();m_it_as++){
         m_it_as->second.printNode(outputfFile);
     }
-
-
 }
