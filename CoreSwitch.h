@@ -15,7 +15,6 @@ private:
 public:
 
     CoreSwitch() {
-        Node::Node();
         n_type = "Switch";
     }
     /**
@@ -26,7 +25,6 @@ public:
      * @param numPort number of port
      */
     CoreSwitch(const int a, const int b, const int c, int numPort) {
-        Node::Node();
         name_a = a;
         name_b = b;
         name_c = c;

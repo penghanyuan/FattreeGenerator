@@ -16,12 +16,10 @@ class Host:public Node {
 
 public:
     Host() {
-        Node::Node();
         n_type = "Hca";
     }
 
     Host(int id,int numPort) {
-        Node::Node();
         ostringstream ostr;
         ostr << id;
         n_name = "\"Node("+ostr.str()+")\"";

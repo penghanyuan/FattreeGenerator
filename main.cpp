@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <math.h>
+#include <cstdlib>
 #include "Pod.h"
 #include "CoreSwitch.h"
 
@@ -29,7 +30,7 @@ int main(int argc, char*argv[]) {
         }
     }
     ofstream outputfFile;
-    outputfFile.open(" fattree.topo");
+    outputfFile.open("fattree.topo");
 
     // write information
     outputfFile<<"#fat tree topology file.\n"

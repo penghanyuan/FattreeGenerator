@@ -63,7 +63,7 @@ void Node::printNode(ofstream &outputfFile) {
     sortConnectList();
     for(int i=0;i<v_connect.size();i++){
         outputfFile <<"[" <<v_connect[i]->getI_ori_port()<<"]"<<"\t"
-                    << v_connect[i]->getPN_connect_with()->getName()<<"\t"
+                    << v_connect[i]->getPN_connect_with()->getName()
                     <<"[" <<v_connect[i]->getI_des_port()<<"]"
                     << endl;
     }
